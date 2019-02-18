@@ -1,6 +1,6 @@
 {
   "name": "password-encrypt-util",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "node.js password encrypt util",
   "main": "index.js",
   "scripts": {

@@ -1,7 +1,7 @@
 
 ## Install
 ```
-npm install  password-encrypt-util
+npm install  password-encrypt-util --save
 ```
 
 ## Example
