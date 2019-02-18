@@ -1,0 +1,22 @@
+{
+  "name": "password-encrypt-util",
+  "version": "1.0.0",
+  "description": "node.js password encrypt util",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JinYongHwa/password-encrypt-util.git"
+  },
+  "keywords": [
+    "node.js",
+    "password",
+    "encrypt",
+    "decrypt",
+    "hash"
+  ],
+  "author": "jinyonghwa",
+  "license": "MIT"
+}
