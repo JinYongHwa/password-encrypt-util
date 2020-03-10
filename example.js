@@ -12,9 +12,9 @@ var hashPasswordWithRepeat = password.getHashPassword("123456", 7) //7 times enc
 console.log(hashPasswordWithRepeat) //1128e37c59f53accfcea83feebc35b5034a69d9ad74d6257200bf4bb74824bd9
 
 //normal text -> encrypted password (aes-256-cbc)
-var encryptedPassword = password.encryptPassword("123456")
+var encryptedPassword = password.encryptPasswordV2("123456")
 console.log(encryptedPassword) //Dg5yvVIWlGufdGnaiAGomA==
 
 //encrypted password ->normal text (aes-256-cbc)
-var decryptedPassword = password.decryptPassword(encryptedPassword)
+var decryptedPassword = password.decryptPasswordV2(encryptedPassword)
 console.log(decryptedPassword) //123456

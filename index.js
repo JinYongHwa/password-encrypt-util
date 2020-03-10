@@ -28,11 +28,13 @@ Password.prototype.encryptPassword = function(password) {
   var SECRET_KEY = this.getSecretKey()
   var ENCODING = 'base64'
   var text = password
+  const iv = Buffer.alloc(16, 0);
   var cipher = crypto.createCipher('aes-256-cbc', SECRET_KEY)
   var cryptedPassword = cipher.update(text, 'utf8', ENCODING)
   cryptedPassword += cipher.final(ENCODING)
   return cryptedPassword
 }
+
 //대칭키 복호화
 Password.prototype.decryptPassword = function(password) {
   var cryptedPassword = ""
@@ -48,6 +50,46 @@ Password.prototype.decryptPassword = function(password) {
     return null;
   }
   return cryptedPassword
+}
+
+
+Password.prototype.encryptPasswordV2 = function(password) {
+  var SECRET_KEY = this.getSecretKey()
+  var ENCODING = 'hex'
+
+  const algorithm = 'aes-192-cbc';
+
+  // Use the async `crypto.scrypt()` instead.
+  const key = crypto.scryptSync(SECRET_KEY, 'salt', 24);
+  // Use `crypto.randomBytes` to generate a random iv instead of the static iv
+  // shown here.
+  const iv = Buffer.alloc(16, 0); // Initialization vector.
+
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+
+  let encrypted = cipher.update(password, 'utf8', ENCODING);
+  encrypted += cipher.final(ENCODING);
+  return encrypted
+}
+//대칭키 복호화
+Password.prototype.decryptPasswordV2 = function(password) {
+
+
+  var SECRET_KEY = this.getSecretKey()
+  var ENCODING = 'hex'
+  const algorithm = 'aes-192-cbc';
+
+  // Use the async `crypto.scrypt()` instead.
+  const key = crypto.scryptSync(SECRET_KEY, "salt", 24);
+  // The IV is usually passed along with the ciphertext.
+  const iv = Buffer.alloc(16, 0); // Initialization vector.
+  const decipher = crypto.createDecipheriv(algorithm, key, iv);
+
+  // Encrypted using same algorithm, key and iv.
+
+  let decrypted = decipher.update(password, 'hex', 'utf8');
+  decrypted += decipher.final('utf8');
+  return decrypted
 }
 
 //복호화 불가능한 패스워드
